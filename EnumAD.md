@@ -1,8 +1,9 @@
 # Splunk
 
-## Detectar enumeração utilizando ferramentas como bloodhound ou similares
+Detectar enumeração utilizando ferramentas como bloodhound ou similares
 
-`index=idx_windows source="XmlWinEventLog:Security" ( EventCode IN (4799, 4798) ) SubjectUserName!=*$ 
+```Splunk
+index=idx_windows source="XmlWinEventLog:Security" ( EventCode IN (4799, 4798) ) SubjectUserName!=*$ 
 | bin span=2m _time 
 | stats values(TargetUserName) as TargetUserName dc(TargetUserName) as count by _time CallerProcessName SubjectUserName 
 | where count > 2 
@@ -16,4 +17,5 @@
 | eventstats sum(count) as count 
 | eval TargetUserName = mvjoin(TargetUserName, ", ") 
 | eval CallerProcessName = mvjoin(CallerProcessName, ", ") 
-| fillnull value="NULL"`
+| fillnull value="NULL"
+```
