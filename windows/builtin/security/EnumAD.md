@@ -22,7 +22,7 @@ index=idx_windows source="XmlWinEventLog:Security" ( EventCode IN (4799, 4798) )
 
 Obs: Os eventos 4799 e 4798 são gerados por padrão em controladores de domínio da versão `Windows Server 2016`, para versões anteriores, utilizamos o evento 5145, que não é vem habilitado por padrão, para habilitá-lo, diretamente no controlador de domínio, acesse `Local Security Policy > Local Policies > Audit Policy > Audit object access Properties` e selecione `Success`
 
-![alt text](https://raw.githubusercontent.com/SecurityEveryDay/Rules/main/AuditObjectAccessSuccess.png)
+![Screenshot](https://raw.githubusercontent.com/SecurityEveryDay/Rules/main/img/AuditObjectAccessSuccess.png)
 
 Obs2: Dependendo do ambiente, 5145 eventos podem gerar milhares de registros, pós qualquer acesso será registrado, para evitar isso você pode criar uma regex para indexar apenas os eventos 5145 que interessam (Se você tem licença e espaço em disco suficiente, é interessante manter o evento para outros casos de uso e forense, essa dica é para evitar custos extras), sugestão de regex:
 * `EventID\>5145.+RelativeTargetName\'\>(srvsvc|lsarpc|samr)`
