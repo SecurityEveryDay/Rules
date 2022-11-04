@@ -8,7 +8,7 @@ index=idx_windows source="XmlWinEventLog:Security" ( EventCode IN (4799, 4798) )
 | stats values(TargetUserName) as TargetUserName dc(TargetUserName) as count by _time CallerProcessName SubjectUserName 
 | where count > 2 
 | append 
-    [| search index=idx_windows source="XmlWinEventLog:Security" EventCode IN (5145) RelativeTargetName IN ("srvsvc", "lsarpc", "samr") SubjectUserName!=*$ 
+    [| search index=idx_windows source="XmlWinEventLog:Security" EventCode IN (5145) RelativeTargetName IN ("srvsvc", "lsarpc","efsrpc","lsass", "samr") SubjectUserName!=*$ 
     | bin span=2m _time 
     | stats count by _time src_ip SubjectUserName 
     | where count > 2] 
