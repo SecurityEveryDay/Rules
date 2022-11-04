@@ -25,7 +25,7 @@ Obs: Os eventos 4799 e 4798 são gerados por padrão em controladores de domíni
 ![Screenshot](https://raw.githubusercontent.com/SecurityEveryDay/secday/main/rules/img/AuditObjectAccessSuccess.png)
 
 Obs2: Dependendo do ambiente, 5145 eventos podem gerar milhares de registros, pós qualquer acesso será registrado, para evitar isso você pode criar uma regex para indexar apenas os eventos 5145 que interessam (Se você tem licença e espaço em disco suficiente, é interessante manter o evento para outros casos de uso e forense, essa dica é para evitar custos extras), sugestão de regex:
-* `EventID\>5145.+RelativeTargetName\'\>(srvsvc|lsarpc|samr)`
+* `EventID\>5145.+RelativeTargetName\'\>(srvsvc|lsarpc|samr|efsrpc|lsass)`
 
 Obs3: Você pode e deve ajustar o `span=2m` e `where count > 3` para o intervalo que faça sentido para o seu ambiente, não envie a regra diretamente para produção, deixe algum tempo na homologação para entender o comportamento normal do seu ambiente.
 
